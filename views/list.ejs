@@ -1,0 +1,33 @@
+<%- include("header") -%>
+
+    <div class="box" id="heading">
+        <h1>
+            <%= listTitle %>
+        </h1>
+    </div>
+
+    <div class="box">
+
+        <% newListItems.forEach(function(item){ %>
+            <form class="" action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" name="checkbox" value= "<%= item._id %>" onChange="this.form.submit()"> <!--onChange="this.form.submit()"  this attribute will make the checkbox submit the data to the form analogus to type="submit" in button elements-->
+                    <p>
+                        <%= item.name %>
+                    </p>
+                </div>
+                <input type="hidden" name="listName" value="<%= listTitle %>"> <!--input with hidden type displays no input field on web rather helps us to give a particular value to it and use it in app.js-->
+            </form>
+
+        <% }); %>
+
+                <!-- creating a form that will post the info inside the form to my server at the home route "/" -->
+
+                <form class="item" action="/" method="post">
+                    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                    <button type="submit" name="list" value= <%= listTitle %> >+</button>
+                    <!--this button will trigger this post request in the form to this route -->
+
+                </form>
+    </div>
+    <%- include("footer") -%>
